@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, Like } from 'typeorm';
 import { CreatePostDto } from './dto/create-post.dto';
@@ -7,6 +7,8 @@ import { Post } from './entities/post.entity';
 
 @Injectable()
 export class PostsService {
+  private readonly logger = new Logger(PostsService.name);
+
   constructor(
     @InjectRepository(Post)
     private postsRepository: Repository<Post>,
@@ -17,6 +19,8 @@ export class PostsService {
   }
 
   async findAll(query: { title: string }) {
+    this.logger.log(`Get all posts misha`);
+
     return this.postsRepository.find({
       where: {
         ...query,
