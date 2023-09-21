@@ -7,4 +7,7 @@ export class Post {
 
   @Column()
   title: string;
+
+  @Column()
+  priority: number;
 }
